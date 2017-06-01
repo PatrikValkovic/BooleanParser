@@ -6,6 +6,7 @@ package cz.valkovic.boolparser.SyntaxTree;
  * Part of BooleanParser
  */
 
+import java.util.HashSet;
 import java.util.Set;
 
 public class Xor extends Node {
@@ -20,6 +21,6 @@ public class Xor extends Node {
 
     @Override
     public Set<String> result() {
-        return new Set<String>();
+        return new HashSet<>();
     }
 }
