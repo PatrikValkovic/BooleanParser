@@ -8,20 +8,7 @@ package cz.valkovic.boolparser;
 import cz.valkovic.boolparser.SyntaxTree.*;
 import java.util.Set;
 
-/*
 
-Parsovací tabulka pro gramatiku:
-
-    a   +   *   (   )   not epsilon
-E   1           1       1
-E'      2           3       3
-T   4           4       4
-T'      6   5       6       6
-F   7           9       8
-
- *
- * @author ondrej
- */
 public class SyntaxAnalyze {
 
     private static boolean debug = true;
