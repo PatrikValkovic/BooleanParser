@@ -1,8 +1,7 @@
-package BooleanParser.SyntaxTree;
+package cz.valkovic.boolparser.SyntaxTree;
 
 import java.util.HashSet;
 import java.util.Set;
-import pkgboolean.BooleanTable;
 
 /**
  * Předek NODE, reprezentace operandu Termu s hodnotou String a vysledkem z
@@ -13,16 +12,14 @@ import pkgboolean.BooleanTable;
 public class Terminal extends Node {
 
     private String value;
-    private BooleanTable search;
 
-    public Terminal(String value, BooleanTable search) {
+    public Terminal(String value) {
         this.value = value;
-        this.search = search;
     }
 
     @Override
     public Set<String> result() {
-        return new HashSet<>(this.search.search(this.value));
+        return new HashSet<>();
     }
 
 }

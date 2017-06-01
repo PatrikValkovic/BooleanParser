@@ -1,4 +1,4 @@
-package BooleanParser.SyntaxTree;
+package cz.valkovic.boolparser.SyntaxTree;
 
 import java.util.Set;
 

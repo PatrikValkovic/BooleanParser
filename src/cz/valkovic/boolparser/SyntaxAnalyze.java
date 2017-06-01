@@ -1,12 +1,8 @@
-package BooleanParser;
+package cz.valkovic.boolparser;
+
+import cz.valkovic.boolparser.SyntaxTree.*;
 
 import java.util.Set;
-import pkgboolean.BooleanTable;
-import BooleanParser.SyntaxTree.And;
-import BooleanParser.SyntaxTree.Node;
-import BooleanParser.SyntaxTree.Not;
-import BooleanParser.SyntaxTree.Or;
-import BooleanParser.SyntaxTree.Terminal;
 
 /*
 
@@ -40,7 +36,6 @@ public class SyntaxAnalyze {
     private static boolean debug = true;
 
     private LexAnalyze lex;
-    private BooleanTable table;
 
     private Node root;
 
@@ -48,11 +43,9 @@ public class SyntaxAnalyze {
      * Příjmá LexAnalyze a BooleanTable pro vyhledávání
      *
      * @param l
-     * @param t
      */
-    public SyntaxAnalyze(LexAnalyze l, BooleanTable t) {
+    public SyntaxAnalyze(LexAnalyze l) {
         this.lex = l;
-        this.table = t;
         this.root = null;
     }
 
@@ -186,7 +179,7 @@ public class SyntaxAnalyze {
             if (debug) {
                 System.out.println("F->a");
             }
-            Node t = new Terminal(this.lex.current().data, this.table);
+            Node t = new Terminal(this.lex.current().data);
             this.lex.move();
             return t;
         } else if (this.lex.current().data == "(") {
