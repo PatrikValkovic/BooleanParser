@@ -10,19 +10,6 @@ import java.util.Set;
 
 /*
 
-LL1 gramatika:
-
-(1)E->TE'
-(2)E'->or TE'
-(3)E'->epsilon
-(4)T->FT'
-(5)T'->and FT'
-(6)T'->epsilon
-(7)F->a
-(8)F->not F
-(9)F->( E )
-
-
 Parsovací tabulka pro gramatiku:
 
     a   +   *   (   )   not epsilon
