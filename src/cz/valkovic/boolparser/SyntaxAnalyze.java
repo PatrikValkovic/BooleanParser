@@ -1,7 +1,11 @@
 package cz.valkovic.boolparser;
 
-import cz.valkovic.boolparser.SyntaxTree.*;
+/*
+ * Created by Patrik Valkovic
+ * Part of BooleanParser
+ */
 
+import cz.valkovic.boolparser.SyntaxTree.*;
 import java.util.Set;
 
 /*

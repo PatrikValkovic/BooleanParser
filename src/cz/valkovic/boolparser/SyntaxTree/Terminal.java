@@ -1,14 +1,14 @@
 package cz.valkovic.boolparser.SyntaxTree;
 
+/*
+ * Created by Patrik Valkovic
+ * Part of BooleanParser
+ */
+
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- * Předek NODE, reprezentace operandu Termu s hodnotou String a vysledkem z
- * BooleanTable
- *
- * @author ondrej
- */
+
 public class Terminal extends Node {
 
     private String value;

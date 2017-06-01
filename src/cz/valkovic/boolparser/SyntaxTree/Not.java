@@ -1,13 +1,14 @@
 package cz.valkovic.boolparser.SyntaxTree;
 
+/*
+ * Created by Patrik Valkovic
+ * Part of BooleanParser
+ */
+
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- * Předek NODE, reprezentace operandu NOT
- *
- * @author ondrej
- */
+
 public class Not extends Node {
 
     Node n;

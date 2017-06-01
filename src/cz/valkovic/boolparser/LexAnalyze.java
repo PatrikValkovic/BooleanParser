@@ -1,13 +1,14 @@
 package cz.valkovic.boolparser;
 
+/*
+ * Created by Patrik Valkovic
+ * Part of BooleanParser
+ */
+
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Lexikální Analyza, Struktura výrazu
- *
- * @author ondrej
- */
+
 public class LexAnalyze {
 
     private List<Token> tokens;

@@ -1,12 +1,13 @@
 package cz.valkovic.boolparser.SyntaxTree;
 
+/*
+ * Created by Patrik Valkovic
+ * Part of BooleanParser
+ */
+
 import java.util.Set;
 
-/**
- * Node je základni prvek stromu pro SyntaxAnalyzu Potomci: AND, NOT, OR, Terminal
- *
- * @author ondrej
- */
+
 public abstract class Node {
 
     public static Set<String> all;

@@ -1,10 +1,11 @@
 package cz.valkovic.boolparser;
 
-/**
- * Struktura pro LexAnalyzu, uchovává typ boolean a hodnotu String
- *
- * @author ondrej
+/*
+ * Created by Patrik Valkovic
+ * Part of BooleanParser
  */
+
+
 class Token {
 
     boolean op;
