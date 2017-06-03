@@ -15,10 +15,10 @@ public class LexAnalyze {
     private int position;
 
     /**
-     * Naplni strukturu příslušnými Tokeny
+     * Parse data string
      *
-     * @param data
-     * @return
+     * @param data Data to parse
+     * @return True if format is valid, false otherwise
      */
     public boolean load(String data) {
 
@@ -57,7 +57,7 @@ public class LexAnalyze {
             } else {
                 StringBuilder b = new StringBuilder();
                 while (index < input.length && input[index] != ' ' && input[index] != ')') {
-                    if(!Character.isLowerCase(input[index]))
+                    if (!Character.isLowerCase(input[index]))
                         return false;
                     b.append(input[index++]);
                 }
@@ -69,62 +69,54 @@ public class LexAnalyze {
     }
 
     /**
-     * Kontroluje správnost závorek
+     * Fast control right count and position of brackets
      *
-     * @param data
-     * @return
+     * @param data Data for parsing
+     * @return True if count and placing of brackets is right, false otherwise
      */
-
     private boolean controlBrackets(String data) {
         int countOfLeftBrackets = 0;
 
         for (char c : data.toCharArray()) {
-            if (c == '(') {
+            if (c == '(')
                 countOfLeftBrackets++;
-            } else if (c == ')' && countOfLeftBrackets > 0) {
+            else if (c == ')' && countOfLeftBrackets > 0)
                 countOfLeftBrackets--;
-            } else if (c == ')') {
+            else
                 return false;
-            }
         }
-
         return countOfLeftBrackets == 0;
     }
 
     /**
-     * Vrací konkrétní token struktury nebo vyjímku epsilon
+     * Return current token in stream
      *
-     * @return
-     * @throws Exception
+     * @return Token in stream
      */
-    public Token current() throws Exception {
-        if (isEpsilon()) {
-            throw new Exception("Reached end of sequence");
-        }
-
+    public Token current() {
+        if (isEpsilon())
+            return null;
         return this.tokens.get(this.position);
     }
 
     /**
-     * Vrací zda je currnet epsilon
+     * Check, if is next token epsilon
      *
-     * @return
+     * @return True if epsilon reached, false otherwise
      */
     public boolean isEpsilon() {
         return this.tokens.size() == this.position;
     }
 
     /**
+     * Move to next token
      *
-     * Posouvá ukazatel ve struktuře
-     *
-     * @return
+     * @return True if additional token is present, false otherwise
      */
     public boolean move() {
         if (this.tokens.size() <= this.position) {
             return false;
         }
-
         this.position++;
         return true;
     }
