@@ -144,7 +144,10 @@ public class SyntaxAnalyze {
         if(!lex.current().op) {
             if (debug)
                 System.out.println("T->[a-zA-Z]");
-            return new Terminal(lex.current().data);
+
+            Node t = new Terminal(lex.current().data);
+            lex.move();
+            return t;
         }
         if(lex.current().data == "("){
             if (debug)

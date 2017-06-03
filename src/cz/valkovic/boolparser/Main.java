@@ -7,8 +7,15 @@ package cz.valkovic.boolparser;
  */
 
 
+import cz.valkovic.boolparser.SyntaxTree.Node;
+
 public class Main {
-    public static void main(String[] args) {
-        System.out.println("Hello World");
+    public static void main(String[] args) throws Exception {
+        LexAnalyze l = new LexAnalyze();
+        l.load("pet and jedna xor dva and (dva or tri xor ctyri) and (pet and sest)");
+
+        SyntaxAnalyze a = new SyntaxAnalyze(l);
+        Node n = a.results();
+        System.out.println(n.toString());
     }
 }

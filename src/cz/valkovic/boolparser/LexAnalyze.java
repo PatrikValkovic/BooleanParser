@@ -82,7 +82,7 @@ public class LexAnalyze {
                 countOfLeftBrackets++;
             else if (c == ')' && countOfLeftBrackets > 0)
                 countOfLeftBrackets--;
-            else
+            else if(c == ')')
                 return false;
         }
         return countOfLeftBrackets == 0;
