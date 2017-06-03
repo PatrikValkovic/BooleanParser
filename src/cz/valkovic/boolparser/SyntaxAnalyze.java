@@ -7,8 +7,6 @@ package cz.valkovic.boolparser;
 
 import cz.valkovic.boolparser.SyntaxTree.*;
 
-import java.util.Set;
-
 
 public class SyntaxAnalyze {
 
@@ -21,9 +19,8 @@ public class SyntaxAnalyze {
     private Node root;
 
     /**
-     * Příjmá LexAnalyze a BooleanTable pro vyhledávání
-     *
-     * @param l
+     * Constructor
+     * @param l Analyzer with tokenize text
      */
     public SyntaxAnalyze(LexAnalyze l) {
         this.lex = l;
@@ -31,23 +28,21 @@ public class SyntaxAnalyze {
     }
 
     /**
-     * Vrací výsledek Celeho výrazu s výsledkama z booleanTable
-     *
-     * @return
-     * @throws Exception
+     * Return parsed results as tree
+     * @return Root node of parsed tree
+     * @throws Exception When invalid syntax is used
      */
-    public Set<String> results() throws Exception {
+    public Node results() throws Exception {
         if (this.root == null) {
             this.parse();
         }
 
-        return this.root.result();
+        return this.root;
     }
 
     /**
-     * Spouští parsrování výrazu
-     *
-     * @throws Exception
+     * Parse text from lex analyzer into tree
+     * @throws Exception When invalid syntax is used
      */
     public void parse() throws Exception {
         this.root = Or();
