@@ -20,4 +20,13 @@ public class BinaryNode extends Node {
     public Set<String> result() {
         return null;
     }
+
+    @Override
+    public String print(int previous, Boolean isLast) {
+        StringBuilder b = new StringBuilder();
+        b.append(super.print(previous, isLast));
+        b.append(l.print(previous+1));
+        b.append(r.print(previous+1,true));
+        return b.toString();
+    }
 }

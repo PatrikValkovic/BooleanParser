@@ -6,31 +6,17 @@ package cz.valkovic.boolparser.SyntaxTree;
  * Part of BooleanParser
  */
 
-import java.util.HashSet;
 import java.util.Set;
 
-public class Xor extends Node {
+public class Xor extends BinaryNode {
 
-    private Node l;
-    private Node r;
-
-    public Xor(Node l, Node r){
-        this.l = l;
-        this.r = r;
+    public Xor(Node l, Node r) {
+        super(l, r);
     }
 
     @Override
     public Set<String> result() {
         return null;
-    }
-
-    @Override
-    public String print(int previous, Boolean isLast) {
-        StringBuilder b = new StringBuilder();
-        b.append(super.print(previous, isLast));
-        b.append(l.print(previous+1));
-        b.append(r.print(previous+1,true));
-        return b.toString();
     }
 
     @Override
