@@ -57,6 +57,8 @@ public class LexAnalyze {
             } else {
                 StringBuilder b = new StringBuilder();
                 while (index < input.length && input[index] != ' ' && input[index] != ')') {
+                    if(!Character.isLowerCase(input[index]))
+                        return false;
                     b.append(input[index++]);
                 }
                 this.tokens.add(new Token(b.toString(), false));
