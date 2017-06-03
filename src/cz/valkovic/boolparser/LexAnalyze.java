@@ -48,6 +48,9 @@ public class LexAnalyze {
             } else if (index + 2 <= input.length && input[index] == 'a' && input[index + 1] == 'n' && input[index + 2] == 'd') {
                 this.tokens.add(new Token("and", true));
                 index += 3;
+            } else if (index + 2 <= input.length && input[index] == 'x' && input[index + 1] == 'o' && input[index + 2] == 'r') {
+                this.tokens.add(new Token("xor", true));
+                index += 3;
             } else if (index + 1 <= input.length && input[index] == 'o' && input[index + 1] == 'r') {
                 this.tokens.add(new Token("or", true));
                 index += 2;
