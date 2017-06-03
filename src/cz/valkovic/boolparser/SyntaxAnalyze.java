@@ -50,6 +50,34 @@ public class SyntaxAnalyze {
         this.root = Expresion();
     }
 
+    private Node Or() throw Exception {
+
+    }
+
+    private Node OrRest(Node left) throw Exception {
+
+    }
+
+    private Node Xor() throw Exception {
+
+    }
+
+    private Node XorRest() throw Exception {
+
+    }
+
+    private Node And() throw Exception {
+
+    }
+
+    private Node AndRest() throw Exception {
+
+    }
+
+    private Node Term() throw Exception {
+
+    }
+
     private Node Expresion() throws Exception {
         if (this.lex.current().op == false) {
             if (debug) {
