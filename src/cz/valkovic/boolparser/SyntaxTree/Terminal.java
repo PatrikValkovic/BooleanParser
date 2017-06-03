@@ -22,4 +22,8 @@ public class Terminal extends Node {
         return new HashSet<>();
     }
 
+    @Override
+    protected String symbol(){
+        return this.value;
+    }
 }

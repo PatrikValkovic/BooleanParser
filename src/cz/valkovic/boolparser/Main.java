@@ -16,6 +16,7 @@ public class Main {
 
         SyntaxAnalyze a = new SyntaxAnalyze(l);
         Node n = a.results();
+        System.out.println(n.print());
         System.out.println(n.toString());
     }
 }

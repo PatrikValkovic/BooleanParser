@@ -19,5 +19,4 @@ class Token {
         this.op = op;
         data = input;
     }
-
 }

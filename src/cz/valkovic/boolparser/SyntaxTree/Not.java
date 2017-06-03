@@ -25,4 +25,17 @@ public class Not extends Node {
         return all;
     }
 
+    @Override
+    public String print(int previous, Boolean isLast) {
+        StringBuilder b = new StringBuilder();
+        b.append(super.print(previous, isLast));
+        b.append(n.print(previous+1,true));
+        return b.toString();
+    }
+
+    @Override
+    protected String symbol(){
+        return "not";
+    }
+
 }
