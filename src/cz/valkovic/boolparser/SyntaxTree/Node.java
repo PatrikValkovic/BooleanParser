@@ -5,6 +5,9 @@ package cz.valkovic.boolparser.SyntaxTree;
  * Part of BooleanParser
  */
 
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
 
 
@@ -12,18 +15,21 @@ public abstract class Node {
 
     public abstract Set<String> result();
 
-    public String print(int previous) {
-        return print(previous, false);
-    }
-
     public String print() {
-        return print(0);
+        return print(0, new LinkedList<>(),false);
     }
 
-    public String print(int previous, Boolean isLast) {
+    public String print(int previous, List<Integer> defined, Boolean isLast) {
+        if(previous == 0)
+            return this.symbol() + '\n';
+
         StringBuilder builder = new StringBuilder();
-        for(int i=0;i<previous;i++)
-            builder.append("|  ");
+
+        for(int i=0;i<previous-1;i++)
+            if(defined.contains(i))
+                builder.append("|  ");
+            else
+                builder.append("   ");
 
         builder.append(isLast ? "`--" : "|--");
         builder.append(this.symbol());

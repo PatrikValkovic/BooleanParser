@@ -4,6 +4,7 @@ package cz.valkovic.boolparser.SyntaxTree;/*
  * Part of BooleanParser
  */
 
+import java.util.List;
 import java.util.Set;
 
 public class BinaryNode extends Node {
@@ -22,11 +23,13 @@ public class BinaryNode extends Node {
     }
 
     @Override
-    public String print(int previous, Boolean isLast) {
+    public String print(int previous, List<Integer> defined, Boolean isLast) {
         StringBuilder b = new StringBuilder();
-        b.append(super.print(previous, isLast));
-        b.append(l.print(previous+1));
-        b.append(r.print(previous+1,true));
+        b.append(super.print(previous, defined, isLast));
+        defined.add(previous);
+        b.append(l.print(previous+1,defined,false));
+        defined.remove(defined.size()-1);
+        b.append(r.print(previous+1,defined,true));
         return b.toString();
     }
 }

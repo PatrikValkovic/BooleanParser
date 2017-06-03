@@ -5,6 +5,7 @@ package cz.valkovic.boolparser.SyntaxTree;
  * Part of BooleanParser
  */
 
+import java.util.List;
 import java.util.Set;
 
 
@@ -22,13 +23,13 @@ public class Not extends Node {
     }
 
     @Override
-    public String print(int previous, Boolean isLast) {
-        return super.print(previous, isLast) +
-                n.print(previous + 1, true);
+    public String print(int previous, List<Integer> defined, Boolean isLast) {
+        return super.print(previous, defined, isLast) +
+                n.print(previous + 1, defined, true);
     }
 
     @Override
-    protected String symbol(){
+    protected String symbol() {
         return "not";
     }
 
