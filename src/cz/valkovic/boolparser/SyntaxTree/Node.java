@@ -15,7 +15,7 @@ public abstract class Node {
     public abstract Boolean result(Map<String,Boolean> d);
 
     public String print() {
-        return print(0, new LinkedList<>(),false);
+        return print(0, new LinkedList<Integer>(),false);
     }
 
     public String print(int previous, List<Integer> defined, Boolean isLast) {
