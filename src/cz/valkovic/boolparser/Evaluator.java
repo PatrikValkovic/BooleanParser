@@ -45,9 +45,27 @@ public class Evaluator {
         return lst;
     }
 
-    public String tranformResults(List<List<Boolean>> r) {
-        return "";
-    }
+    public String tranformResults(List<List<Boolean>> r, String[] variables) {
+        StringBuilder b = new StringBuilder();
+        int[] width = new int[variables.length + 1];
 
+        for(int i=0;i<variables.length;i++)
+            width[i] = variables[i].length() < 5 ? 7 : variables[i].length()+2;
+        width[variables.length] = 8;
+
+        b.append('|');
+        for(int i=0;i<variables.length;i++)
+            b.append(" ").append(variables[i]).append(String.join("",Collections.nCopies(width[i]-1-variables[i].length()," "))).append('|');
+        b.append(" Result |");
+        b.append('\n');
+
+        for(List<Boolean> row: r){
+            b.append('|');
+            for(int i=0;i<row.size();i++)
+                b.append(" ").append(row.get(i) ? "true " : "false").append(String.join("",Collections.nCopies(width[i]-6," "))).append('|');
+            b.append('\n');
+        }
+        return b.toString();
+    }
 
 }

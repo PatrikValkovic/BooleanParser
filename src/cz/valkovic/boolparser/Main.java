@@ -14,7 +14,7 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) throws Exception {
         LexAnalyze l = new LexAnalyze();
-        l.load("jedna and dve");
+        l.load("jedna and dve xor x and verylongvariableisusedinthispart");
 
         SyntaxAnalyze a = new SyntaxAnalyze(l);
         Node n = a.results();
@@ -26,6 +26,6 @@ public class Main {
         System.out.print("Used variables: ");
         System.out.println(String.join(",",a.usedVariables()));
         System.out.println();
-        System.out.println(e.tranformResults(table));
+        System.out.println(e.tranformResults(table,variables));
     }
 }
