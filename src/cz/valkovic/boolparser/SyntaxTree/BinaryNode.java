@@ -7,7 +7,7 @@ package cz.valkovic.boolparser.SyntaxTree;/*
 import java.util.List;
 import java.util.Set;
 
-public class BinaryNode extends Node {
+public abstract class BinaryNode extends Node {
 
     protected Node l;
     protected Node r;
@@ -15,11 +15,6 @@ public class BinaryNode extends Node {
     public BinaryNode(Node l, Node r){
         this.l = l;
         this.r = r;
-    }
-
-    @Override
-    public Set<String> result() {
-        return null;
     }
 
     @Override

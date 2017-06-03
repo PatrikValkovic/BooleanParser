@@ -5,6 +5,7 @@ package cz.valkovic.boolparser.SyntaxTree;
  * Part of BooleanParser
  */
 
+import java.util.Dictionary;
 import java.util.Set;
 
 
@@ -17,8 +18,8 @@ public class Terminal extends Node {
     }
 
     @Override
-    public Set<String> result() {
-        return null;
+    public Boolean result(Dictionary<String, Boolean> d) {
+        return d.get(value);
     }
 
     @Override
