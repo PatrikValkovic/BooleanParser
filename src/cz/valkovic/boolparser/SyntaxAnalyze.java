@@ -6,11 +6,14 @@ package cz.valkovic.boolparser;
  */
 
 import cz.valkovic.boolparser.SyntaxTree.*;
+
 import java.util.Set;
 
 
 public class SyntaxAnalyze {
 
+
+    private static String mess = "Parser error";
     private static boolean debug = true;
 
     private LexAnalyze lex;
@@ -47,167 +50,123 @@ public class SyntaxAnalyze {
      * @throws Exception
      */
     public void parse() throws Exception {
-        this.root = Expresion();
+        this.root = Or();
     }
 
-    private Node Or() throw Exception {
-
-    }
-
-    private Node OrRest(Node left) throw Exception {
-
-    }
-
-    private Node Xor() throw Exception {
-
-    }
-
-    private Node XorRest() throw Exception {
-
-    }
-
-    private Node And() throw Exception {
-
-    }
-
-    private Node AndRest() throw Exception {
-
-    }
-
-    private Node Term() throw Exception {
-
-    }
-
-    private Node Expresion() throws Exception {
-        if (this.lex.current().op == false) {
-            if (debug) {
-                System.out.println("E->TE'");
-            }
-            Node t = Term();
-            return ZbExpresion(t);
-        } else if (this.lex.current().data == "(") {
-            if (debug) {
-                System.out.println("E->TE'");
-            }
-            Node t = Term();
-            return ZbExpresion(t);
-        } else if (this.lex.current().data == "not") {
-            if (debug) {
-                System.out.println("E->TE'");
-            }
-            Node t = Term();
-            return ZbExpresion(t);
-        } else {
-            throw new Exception("Chyba parseru -> Expresion");
+    private Node Or() throws Exception {
+        if (!lex.current().op ||
+                lex.current().data == "(" ||
+                lex.current().data == "not") {
+            if (debug)
+                System.out.println("O->XO'");
+            Node l = Xor();
+            return OrRest(l);
         }
+        throw new Exception(mess);
     }
 
-    private Node ZbExpresion(Node left) throws Exception {
-        if (this.lex.isEpsilon()) {
-            if (debug) {
-                System.out.println("E'->epsilon");
-            }
+    private Node OrRest(Node left) throws Exception {
+        if (lex.isEpsilon() || lex.current().data == ")") {
+            if (debug)
+                System.out.println("O'->eps");
             return left;
-        } else if (this.lex.current().data == "or") {
-            if (debug) {
-                System.out.println("E'->or TE'");
-            }
-            this.lex.move();
-            Node right = Term();
+        }
+        if (lex.current().data == "or") {
+            if (debug)
+                System.out.println("O'->or XO'");
+            lex.move();
+            Node right = Xor();
             Node or = new Or(left, right);
-            return ZbExpresion(or);
-        } else if (this.lex.current().data == ")") {
-            if (debug) {
-                System.out.println("E'->epsilon");
-            }
-            return left;
-        } else {
-            throw new Exception("Chyba parseru -> ZbExpresion");
+            return OrRest(or);
         }
+        throw new Exception(mess);
+    }
+
+    private Node Xor() throws Exception {
+        if (!lex.current().op ||
+                lex.current().data == "(" ||
+                lex.current().data == "not") {
+            if (debug)
+                System.out.println("X->AX'");
+            Node left = And();
+            return XorRest(left);
+        }
+        throw new Exception(mess);
+    }
+
+    private Node XorRest(Node left) throws Exception {
+        if (lex.isEpsilon() ||
+                lex.current().data == ")" ||
+                lex.current().data == "or") {
+            if (debug)
+                System.out.println("X'->eps");
+            return left;
+        }
+        if (lex.current().data == "xor") {
+            if (debug)
+                System.out.println("X'->xor AX'");
+            lex.move();
+            Node right = And();
+            Node xor = new Xor(left, right);
+            return XorRest(xor);
+        }
+        throw new Exception(mess);
+    }
+
+    private Node And() throws Exception {
+        if (!lex.current().op ||
+                lex.current().data == "(" ||
+                lex.current().data == "not") {
+            if (debug)
+                System.out.println("A->TA'");
+            Node left = Term();
+            return AndRest(left);
+        }
+        throw new Exception(mess);
+    }
+
+    private Node AndRest(Node left) throws Exception {
+        if (lex.isEpsilon() ||
+                lex.current().data == ")" ||
+                lex.current().data == "or" ||
+                lex.current().data == "xor") {
+            if (debug)
+                System.out.println("A'->eps");
+            return left;
+        }
+        if (lex.current().data == "and") {
+            if (debug)
+                System.out.println("A'->and TA'");
+            lex.move();
+            Node right = Term();
+            Node xor = new And(left, right);
+            return AndRest(xor);
+        }
+        throw new Exception(mess);
     }
 
     private Node Term() throws Exception {
-        if (this.lex.current().op == false) {
-            if (debug) {
-                System.out.println("T->FT'");
-            }
-            Node f = Factor();
-            return ZbTerm(f);
-        } else if (this.lex.current().data == "(") {
-            if (debug) {
-                System.out.println("T->FT'");
-            }
-            Node f = Factor();
-            return ZbTerm(f);
-        } else if (this.lex.current().data == "not") {
-            if (debug) {
-                System.out.println("T->FT'");
-            }
-            Node f = Factor();
-            return ZbTerm(f);
-        } else {
-            throw new Exception("Chyba parseru -> Term");
+        if(!lex.current().op) {
+            if (debug)
+                System.out.println("T->[a-zA-Z]");
+            return new Terminal(lex.current().data);
         }
-    }
-
-    private Node ZbTerm(Node left) throws Exception {
-        if (this.lex.isEpsilon()) {
-            if (debug) {
-                System.out.println("T'->epsilon");
-            }
-            return left;
-        } else if (this.lex.current().data == "or") {
-            if (debug) {
-                System.out.println("T'->epsilon");
-            }
-            return left;
-        } else if (this.lex.current().data == "and") {
-            if (debug) {
-                System.out.println("T'->and FT'");
-            }
-            this.lex.move();
-            Node right = Factor();
-            Node and = new And(left, right);
-            return ZbTerm(and);
-        } else if (this.lex.current().data == ")") {
-            if (debug) {
-                System.out.println("T'->epsilon");
-            }
-            return left;
-        } else {
-            throw new Exception("Chyba parseru -> ZbTerm");
+        if(lex.current().data == "("){
+            if (debug)
+                System.out.println("T->( O )");
+            lex.move();
+            Node o = Or();
+            lex.move();
+            return o;
         }
-
-    }
-
-    private Node Factor() throws Exception {
-        if (this.lex.current().op == false) {
-            if (debug) {
-                System.out.println("F->a");
-            }
-            Node t = new Terminal(this.lex.current().data);
-            this.lex.move();
-            return t;
-        } else if (this.lex.current().data == "(") {
-            if (debug) {
-                System.out.println("F->( E )");
-            }
-            this.lex.move();
-            Node e = Expresion();
-            this.lex.move();
-            return e;
-        } else if (this.lex.current().data == "not") {
-            if (debug) {
-                System.out.println("F->not F");
-            }
-            this.lex.move();
-            Node f = Factor();
-            Node not = new Not(f);
+        if(lex.current().data == "not"){
+            if (debug)
+                System.out.println("T->not T");
+            lex.move();
+            Node n = Term();
+            Node not = new Not(n);
             return not;
-        } else {
-            throw new Exception("Chyba parseru -> Factor");
         }
-
+        throw new Exception(mess);
     }
-
 }
