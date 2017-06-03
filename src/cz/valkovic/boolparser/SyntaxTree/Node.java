@@ -10,8 +10,6 @@ import java.util.Set;
 
 public abstract class Node {
 
-    public static Set<String> all;
-
     public abstract Set<String> result();
 
     public String print(int previous) {

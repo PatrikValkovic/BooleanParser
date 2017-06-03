@@ -21,7 +21,7 @@ public class Xor extends Node {
 
     @Override
     public Set<String> result() {
-        return new HashSet<>();
+        return null;
     }
 
     @Override

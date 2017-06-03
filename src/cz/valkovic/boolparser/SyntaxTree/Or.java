@@ -5,7 +5,6 @@ package cz.valkovic.boolparser.SyntaxTree;
  * Part of BooleanParser
  */
 
-import java.util.HashSet;
 import java.util.Set;
 
 
@@ -21,12 +20,7 @@ public class Or extends Node {
 
     @Override
     public Set<String> result() {
-        Set<String> lr = this.l.result();
-        Set<String> rr = this.r.result();
-        Set<String> s = new HashSet<>(lr.size() + rr.size());
-        s.addAll(lr);
-        s.addAll(rr);
-        return s;
+        return null;
     }
 
 
