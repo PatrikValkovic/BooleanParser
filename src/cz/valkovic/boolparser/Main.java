@@ -14,7 +14,7 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) throws Exception {
         LexAnalyze l = new LexAnalyze();
-        l.load("jedna and dve xor x and verylongvariableisusedinthispart");
+        l.load(args.length == 0 ? "first or second and (third xor not first)" : args[1]);
 
         SyntaxAnalyze a = new SyntaxAnalyze(l);
         Node n = a.results();
