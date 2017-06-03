@@ -12,10 +12,11 @@ import cz.valkovic.boolparser.SyntaxTree.Node;
 public class Main {
     public static void main(String[] args) throws Exception {
         LexAnalyze l = new LexAnalyze();
-        l.load("pet and jedna xor dva and (dva or tri xor ctyri) and (pet and sest)");
+        l.load("pet and jedna or (tri or dva) xor dva and (dva or tri xor ctyri) and (pet and sest)");
 
         SyntaxAnalyze a = new SyntaxAnalyze(l);
         Node n = a.results();
         System.out.println(n.print());
+        System.out.println(String.join(",",a.usedVariables()));
     }
 }

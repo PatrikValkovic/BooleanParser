@@ -23,6 +23,10 @@ public class Terminal extends Node {
 
     @Override
     protected String symbol(){
+        return this.value();
+    }
+
+    public String value(){
         return this.value;
     }
 }

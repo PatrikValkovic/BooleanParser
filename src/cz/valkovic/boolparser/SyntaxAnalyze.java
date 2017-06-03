@@ -7,16 +7,21 @@ package cz.valkovic.boolparser;
 
 import cz.valkovic.boolparser.SyntaxTree.*;
 
+import java.util.HashSet;
+import java.util.Set;
+
 
 public class SyntaxAnalyze {
 
 
     private static String mess = "Parser error";
-    private static boolean debug = true;
+    private static boolean debug = false;
 
     private LexAnalyze lex;
 
     private Node root;
+
+    private Set<String> variables;
 
     /**
      * Constructor
@@ -40,11 +45,16 @@ public class SyntaxAnalyze {
         return this.root;
     }
 
+    public String[] usedVariables(){
+        return this.variables.toArray(new String[this.variables.size()]);
+    }
+
     /**
      * Parse text from lex analyzer into tree
      * @throws Exception When invalid syntax is used
      */
     public void parse() throws Exception {
+        this.variables = new HashSet<String>();
         this.root = Or();
     }
 
@@ -145,8 +155,9 @@ public class SyntaxAnalyze {
             if (debug)
                 System.out.println("T->[a-zA-Z]");
 
-            Node t = new Terminal(lex.current().data);
+            Terminal t = new Terminal(lex.current().data);
             lex.move();
+            this.variables.add(t.value());
             return t;
         }
         if(lex.current().data == "("){
