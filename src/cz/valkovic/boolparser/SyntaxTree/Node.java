@@ -5,14 +5,14 @@ package cz.valkovic.boolparser.SyntaxTree;
  * Part of BooleanParser
  */
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
-
-import java.util.*;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 
 
 public abstract class Node {
 
-    public abstract Boolean result(Dictionary<String,Boolean> d);
+    public abstract Boolean result(Map<String,Boolean> d);
 
     public String print() {
         return print(0, new LinkedList<>(),false);

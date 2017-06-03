@@ -9,14 +9,23 @@ package cz.valkovic.boolparser;
 
 import cz.valkovic.boolparser.SyntaxTree.Node;
 
+import java.util.List;
+
 public class Main {
     public static void main(String[] args) throws Exception {
         LexAnalyze l = new LexAnalyze();
-        l.load("pet and jedna or (tri or dva) xor dva and (dva or tri xor ctyri) and (pet and sest)");
+        l.load("jedna and dve");
 
         SyntaxAnalyze a = new SyntaxAnalyze(l);
         Node n = a.results();
+        String[] variables = a.usedVariables();
+        Evaluator e = new Evaluator(n);
+        List<List<Boolean>> table = e.buildResults(variables);
+
         System.out.println(n.print());
+        System.out.print("Used variables: ");
         System.out.println(String.join(",",a.usedVariables()));
+        System.out.println();
+        System.out.println(e.tranformResults(table));
     }
 }

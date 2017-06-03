@@ -5,8 +5,8 @@ package cz.valkovic.boolparser.SyntaxTree;
  * Part of BooleanParser
  */
 
-import java.util.Dictionary;
 import java.util.List;
+import java.util.Map;
 
 
 public class Not extends Node {
@@ -18,7 +18,7 @@ public class Not extends Node {
     }
 
     @Override
-    public Boolean result(Dictionary<String, Boolean> d) {
+    public Boolean result(Map<String, Boolean> d) {
         return !n.result(d);
     }
 

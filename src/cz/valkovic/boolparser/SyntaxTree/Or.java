@@ -5,8 +5,7 @@ package cz.valkovic.boolparser.SyntaxTree;
  * Part of BooleanParser
  */
 
-import java.util.Dictionary;
-import java.util.Set;
+import java.util.Map;
 
 
 public class Or extends BinaryNode {
@@ -16,7 +15,7 @@ public class Or extends BinaryNode {
     }
 
     @Override
-    public Boolean result(Dictionary<String, Boolean> d) {
+    public Boolean result(Map<String, Boolean> d) {
         return l.result(d) || r.result(d);
     }
 

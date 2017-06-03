@@ -6,8 +6,7 @@ package cz.valkovic.boolparser.SyntaxTree;
  * Part of BooleanParser
  */
 
-import java.util.Dictionary;
-import java.util.Set;
+import java.util.Map;
 
 public class Xor extends BinaryNode {
 
@@ -16,7 +15,7 @@ public class Xor extends BinaryNode {
     }
 
     @Override
-    public Boolean result(Dictionary<String, Boolean> d) {
+    public Boolean result(Map<String, Boolean> d) {
         return !l.result(d).equals(r.result(d));
     }
 
